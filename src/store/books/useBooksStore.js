@@ -5,6 +5,7 @@ const initState = {
   isLoading: false,
   error: null,
   searchTerm: "",
+  selectedBook: {},
 };
 
 const useBooksStore = create((set) => ({

@@ -1,7 +1,9 @@
 import axios from "axios";
+import useBooksStore from "../store/books/useBooksStore";
 
 const BooksList_URL =
   "https://openlibrary.org/search.json?q=life&sort=random&limit=21";
+
 async function fetchBooks() {
   const searchEndPoint = BooksList_URL;
 

@@ -1,15 +1,23 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
+import BookDetails from "./pages/BookDetails";
 
 import React from "react";
+import Layout from "./components/common/Layout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/books/:id" />
+        <Route path="/" element={<Layout />}>
+          <Route index={true} element={<HomePage />} />
+        </Route>
+        <Route path="/books/:id" element={<Layout />}>
+          <Route index={true} element={<BookDetails />} />
+        </Route>
+
+        <Route path="*" element={<div>404 - Page Not Found!</div>} />
       </Routes>
     </BrowserRouter>
   );
