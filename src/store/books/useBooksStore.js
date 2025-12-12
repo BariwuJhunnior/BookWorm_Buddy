@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 const initState = {
   books: [],
-  isLoading: false,
+  ApiStatus: null,
   error: null,
   searchTerm: "",
   selectedBook: {},
@@ -14,6 +14,8 @@ const useBooksStore = create((set) => ({
   updateBooksList: (book) =>
     set((state) => ({ books: [...state.books, book] })),
   selectedBook: (book) => set({ selectedBook: book }),
+  setApiStatus: (status) => set({ ApiStatus: status }),
+  setError: (error) => set({ error: error }),
   resetBookList: () => set({ ...initState }),
   clearSelectedBook: () => set({ selectedBook: {} }),
   clearBooksList: () => set({ books: [] }),

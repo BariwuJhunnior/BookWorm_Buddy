@@ -1,20 +1,35 @@
 import axios from "axios";
 import useBooksStore from "../store/books/useBooksStore";
-
-const BooksList_URL =
-  "https://openlibrary.org/search.json?q=life&sort=random&limit=21";
+import SearchBook from "../config/index";
 
 async function fetchBooks() {
-  const searchEndPoint = BooksList_URL;
+  const { searchTerm, updateBooksList, books, setApiStatus, ApiStatus } =
+    useBooksStore.getState();
+
+  const searchURL = `${SearchBook}/${encodeURIComponent(searchTerm)}`;
+
+  if (ApiStatus === "pending") {
+    return;
+  }
 
   try {
-    const response = await axios.get(searchEndPoint);
+    setApiStatus("pending");
+    const response = await axios.get(searchURL);
 
     const BooksResult = response.data;
     console.log("Successfully fetched books.");
-    console.log(BooksResult);
+
+    if (BooksResult.response === "True") {
+      updateBooksList([...books, ...BooksResult.books]);
+      setApiStatus("success");
+    } else {
+      setApiStatus("failure");
+      throw new Error("Something went wrong while fetching books.");
+    }
+    return BooksResult;
   } catch (error) {
-    console.error("Error fetching data from Open Library:", error);
+    setApiStatus("failure");
+    console.error("Error fetching books:", error);
 
     throw new Error(
       "Could not connect to the book database. Please check your network."
