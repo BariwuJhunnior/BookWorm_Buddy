@@ -8,7 +8,7 @@ const Layout = () => {
     <div className="flex flex-col min-h-screen">
       <nav className="flex h-15 bg-gray-800 justify-center items-center text-white transition-all duration-150">
         <ul>
-          <li className="hover:scale-150 transition-all duration-150">
+          <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
             <Link to="/">Home</Link>
           </li>
         </ul>

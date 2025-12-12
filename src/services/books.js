@@ -19,7 +19,7 @@ async function fetchBooks() {
     const BooksResult = response.data;
     console.log("Successfully fetched books.");
 
-    if (BooksResult.response === "True") {
+    if (BooksResult.response === "OK") {
       updateBooksList([...books, ...BooksResult.books]);
       setApiStatus("success");
     } else {
