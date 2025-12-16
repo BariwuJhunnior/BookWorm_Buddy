@@ -11,15 +11,7 @@ const BookDisplay = () => {
     <div className="flex flex-wrap justify-center gap-4 p-4 my-[2em]">
       {/* Book Display Component Content */}
       {books.length > 0 ? (
-        books.map((book, index) => (
-          <BooksCard
-            title={book.title}
-            authors={book.author_name[0]}
-            publish_year={book.first_publish_year}
-            languages={book.language.join(", ")}
-            key={index}
-          />
-        ))
+        books.map((book, index) => <BooksCard index={index} key={index} />)
       ) : isLoading ? (
         <p>Fetching your book details...</p>
       ) : (
