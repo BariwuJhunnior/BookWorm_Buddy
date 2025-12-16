@@ -15,7 +15,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   const languages = book.language ?? book.languages ?? ["Unknown"];
 
   return (
-    <div className="border p-4 rounded shadow-md max-w-sm flex flex-col items-start">
+    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start bg-gradient-to-r from-gray-800 to-blue-900">
       <h2>
         <strong>Title: </strong>
         {title}
@@ -29,7 +29,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         {Array.isArray(author_name) ? author_name[0] : author_name}
       </p>
       <p>
-        <strong>Language:</strong>{" "}
+        <strong>Language(s):</strong>{" "}
         {Array.isArray(languages) ? languages.join(", ") : languages}
       </p>
     </div>

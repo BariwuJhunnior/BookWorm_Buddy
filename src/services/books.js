@@ -8,7 +8,7 @@ async function fetchBooks() {
 
   // Don't proceed if no search term
   if (!searchTerm || searchTerm.trim() === "") {
-    console.log("No search term provided, skipping API request");
+    //console.log("No search term provided, skipping API request");
     return;
   }
 
@@ -28,8 +28,8 @@ async function fetchBooks() {
 
   try {
     setApiStatus("pending");
-    console.log("Fetching books with search term:", searchTerm);
-    console.log("Request URL:", searchURL);
+    //console.log("Fetching books with search term:", searchTerm);
+    //console.log("Request URL:", searchURL);
 
     const response = await fetch(searchURL);
 
@@ -49,7 +49,7 @@ async function fetchBooks() {
 
     // Use response.json() instead of response.data
     const BooksResult = await response.json();
-    console.log("API Response:", BooksResult);
+    //console.log("API Response:", BooksResult);
 
     // Open Library API returns books in 'docs' array, not 'books'
     if (BooksResult.docs && BooksResult.docs.length > 0) {
@@ -60,7 +60,7 @@ async function fetchBooks() {
       // Add each book to the store
       BooksResult.docs.forEach((book) => updateBooksList(book));
       setApiStatus("success");
-      console.log(`Successfully fetched ${BooksResult.docs.length} books`);
+      //console.log(`Successfully fetched ${BooksResult.docs.length} books`);
     } else {
       setApiStatus("failure");
       throw new Error("No books found for the given search term");

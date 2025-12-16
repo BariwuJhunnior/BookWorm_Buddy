@@ -27,7 +27,7 @@ const SearchBar = () => {
     debouncedFetchRef.current();
   };
   return (
-    <div className="flex items-center gap-5 bg-transparent] px-4 py-2 rounded-full md:max-w-[40%] max-w-[80%] sm:max-w-[80%] xs:max-w-[30%] border-solid border-2 border-slate-700 text-black mx-auto my-[1em] justify-between">
+    <div className="flex items-center gap-5 bg-transparent] px-4 py-2 rounded-full md:max-w-[40%] max-w-[80%] sm:max-w-[80%] xs:max-w-[30%] border-solid border-2 border-white text-white mx-auto my-[1em] justify-between mt-20 ">
       <input
         type="text"
         name=""
@@ -36,7 +36,7 @@ const SearchBar = () => {
         onChange={handleChange}
         className="outline-none border-none active:border-none bg-none w-125"
       />
-      <FaSearch className="cursor-pointer hover:opacity-50 transition-all duration-200 " />
+      <FaSearch />
     </div>
   );
 };
