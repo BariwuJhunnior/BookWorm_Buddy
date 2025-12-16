@@ -1,21 +1,18 @@
 import React from "react";
 
 const BookCard = ({ props }) => {
-  const { title, authors, publish_date, publishers, subjects, cover } = props;
+  const { title, author_name, first_publish_year, language } = props;
   return (
     <div className="border p-4 rounded shadow-md max-w-sm flex flex-col items-center">
-      <img src={cover} alt={`Cover of ${title}`} />
+      {/* <img src={cover} alt={`Cover of ${title}`} /> */}
       <h2>
-        {title} - {publish_date}
+        {title} - {first_publish_year}
       </h2>
       <p>
-        <strong>By:</strong> {authors.join(", ")}
+        <strong>By:</strong> {author_name[0]}
       </p>
       <p>
-        <strong>Published by:</strong> {publishers.join(", ")}
-      </p>
-      <p>
-        <strong>Subjects:</strong> {subjects.join(", ")}
+        <strong>Language:</strong> {language.join(", ")}
       </p>
     </div>
   );
