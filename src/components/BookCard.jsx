@@ -124,7 +124,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
             }`}
             onClick={handleDoneReadingClick}
           >
-            Delete
+            Remove
           </button>
         )}
       </div>
