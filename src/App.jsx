@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 import BookDetails from "./pages/BookDetails";
+import FavoritesPage from "./pages/FavoritesPage";
 
 import React from "react";
 import Layout from "./components/common/Layout";
@@ -12,6 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index={true} element={<HomePage />} />
+        </Route>
+        <Route path="/favorites" element={<Layout />}>
+          <Route index={true} element={<FavoritesPage />} />
         </Route>
         <Route path="/books/:id" element={<Layout />}>
           <Route index={true} element={<BookDetails />} />

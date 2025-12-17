@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const initState = {
   books: [],
+  favoriteBooks: [], // List of favorite books
   ApiStatus: null,
   error: null,
   searchTerm: "",
@@ -32,6 +33,22 @@ const useBooksStore = create((set) => ({
     set((state) => ({
       books: state.books.filter((book) => book.id !== bookId),
     })),
+  addToFavorites: (book) =>
+    set((state) => {
+      // Avoid duplicates by checking if book key already exists
+      const exists = state.favoriteBooks.some((fav) => fav.key === book.key);
+      if (exists) return state;
+      return { favoriteBooks: [...state.favoriteBooks, book] };
+    }),
+  removeFromFavorites: (bookKey) =>
+    set((state) => ({
+      favoriteBooks: state.favoriteBooks.filter((book) => book.key !== bookKey),
+    })),
+  isFavorite: (bookKey) => {
+    const state = useBooksStore.getState();
+    return state.favoriteBooks.some((book) => book.key === bookKey);
+  },
+  clearFavorites: () => set({ favoriteBooks: [] }),
 }));
 
 export default useBooksStore;

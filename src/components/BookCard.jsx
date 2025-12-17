@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import useBooksStore from "../store/books/useBooksStore";
+import { FaHeart } from "react-icons/fa";
 
 const BookCard = ({ index, book: bookProp } = {}) => {
-  const { books } = useBooksStore();
+  const { books, addToFavorites, removeFromFavorites, isFavorite } =
+    useBooksStore();
 
   const book =
     bookProp ?? (Number.isInteger(index) ? books[index] : undefined) ?? {};
@@ -14,8 +16,31 @@ const BookCard = ({ index, book: bookProp } = {}) => {
     book.first_publish_year ?? book.first_publish_date ?? "N/A";
   const languages = book.language ?? book.languages ?? ["Unknown"];
 
+  const [isFav, setIsFav] = useState(isFavorite(book.key));
+
+  const handleFavoriteClick = () => {
+    if (isFav) {
+      removeFromFavorites(book.key);
+    } else {
+      addToFavorites(book);
+    }
+    setIsFav(!isFav);
+  };
+
   return (
-    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start ">
+    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start">
+      <button
+        onClick={handleFavoriteClick}
+        className={`mb-3 flex items-center gap-2 px-3 py-1 rounded transition-all ${
+          isFav
+            ? "bg-red-500 text-white hover:bg-red-600"
+            : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+        }`}
+      >
+        <FaHeart />
+        {isFav ? "Remove" : "Add to Favorites"}
+      </button>
+
       <h2>
         <strong>Title: </strong>
         {title}
