@@ -4,12 +4,14 @@ import { FaSearch } from "react-icons/fa";
 import _ from "lodash";
 import fetchBooks from "../services/books";
 
+const DEFAULT_TERM = "life";
+
 const SearchBar = () => {
   const { setSearchTerm } = useBooksStore();
 
   const debouncedFetchRef = useRef(
-    _.debounce(() => {
-      fetchBooks();
+    _.debounce((term) => {
+      fetchBooks(term);
     }, 500)
   );
 
@@ -22,9 +24,20 @@ const SearchBar = () => {
   }, []);
 
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    // call fetchBooks 500ms after user stops typing
-    debouncedFetchRef.current();
+    const value = event.target.value;
+    setSearchTerm(value);
+    // if the user cleared the input, immediately restore default results
+    if (!value || value.trim() === "") {
+      if (debouncedFetchRef.current && debouncedFetchRef.current.cancel) {
+        debouncedFetchRef.current.cancel();
+      }
+      setSearchTerm(DEFAULT_TERM);
+      fetchBooks(DEFAULT_TERM);
+      return;
+    }
+
+    // call fetchBooks 500ms after user stops typing, passing the latest value
+    debouncedFetchRef.current(value);
   };
   return (
     <div className="flex items-center gap-5 bg-transparent] px-4 py-2 rounded-full md:max-w-[40%] max-w-[80%] sm:max-w-[80%] xs:max-w-[30%] border-solid border-2 border-white text-white mx-auto my-[1em] justify-between mt-20 ">

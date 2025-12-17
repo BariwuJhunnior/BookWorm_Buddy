@@ -2,23 +2,23 @@ import useBooksStore from "../store/books/useBooksStore";
 
 const SearchBook = import.meta.env.VITE_OPEN_LIBRARY_BOOK_SEARCH_URL;
 
-async function fetchBooks() {
+async function fetchBooks(query) {
   const { searchTerm, updateBooksList, setApiStatus, ApiStatus } =
     useBooksStore.getState();
 
+  // allow caller to pass a query directly; fallback to store's searchTerm
+  const term =
+    typeof query === "string" && query.trim() !== ""
+      ? query.trim()
+      : searchTerm;
+
   // Don't proceed if no search term
-  if (!searchTerm || searchTerm.trim() === "") {
-    //console.log("No search term provided, skipping API request");
+  if (!term || term.trim() === "") {
     return;
   }
 
-  // URL encode the search term for proper API request
-  // URL encode the search term for proper API request
-  // Use '+' for spaces (application/x-www-form-urlencoded style)
-  const encodedSearchTerm = encodeURIComponent(searchTerm.trim()).replace(
-    /%20/g,
-    "+"
-  );
+  // URL encode the search term for proper API request (use '+' for spaces)
+  const encodedSearchTerm = encodeURIComponent(term).replace(/%20/g, "+");
   const searchURL = `${SearchBook}${encodedSearchTerm}`;
 
   if (ApiStatus === "pending") {
