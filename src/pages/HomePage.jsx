@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router";
 import SearchBar from "../components/SearchBar";
 import BookDisplay from "../components/BookDisplay";
 import fetchBooks from "../services/books";
@@ -15,20 +16,35 @@ const terms = [
   "success",
 ];
 
-const DEFAULT_TERM = terms[Math.floor(Math.random() * terms.length)];
-
 function HomePage() {
   const { books, ApiStatus, searchTerm } = useBooksStore();
+  const location = useLocation();
 
   useEffect(() => {
-    // Always load random books when visiting home page
-    // This clears any previous search results
-    const { setSearchTerm, clearBooksList } = useBooksStore.getState();
+    // Only initialize default/random books when there is no existing
+    // books list and no search term. This preserves the user's
+    // previous books and search box value when they navigate away
+    // and return to Home.
+    const state = useBooksStore.getState();
 
-    clearBooksList();
-    setSearchTerm(DEFAULT_TERM);
-    fetchBooks(DEFAULT_TERM);
-  }, []);
+    // If there are already books in the store, keep them intact
+    if (state.books && state.books.length > 0) return;
+
+    // If the user previously entered a search term (even if it
+    // produced no results), preserve that search state and do not
+    // replace it with a random term.
+    if (state.searchTerm && state.searchTerm.trim() !== "") return;
+
+    const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+    const { setSearchTerm } = state;
+
+    // Only set a random default term if there's no existing term
+    if (!state.searchTerm || state.searchTerm.trim() === "") {
+      setSearchTerm(randomTerm);
+    }
+
+    fetchBooks(randomTerm);
+  }, [location.pathname]);
 
   const noResults =
     searchTerm &&

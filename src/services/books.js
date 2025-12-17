@@ -28,6 +28,10 @@ async function fetchBooks(query) {
 
   try {
     setApiStatus("pending");
+    // Clear existing books immediately so the UI can show a loading state
+    // while new search results are being fetched.
+    const { clearBooksList } = useBooksStore.getState();
+    clearBooksList();
     //console.log("Fetching books with search term:", searchTerm);
     //console.log("Request URL:", searchURL);
 
