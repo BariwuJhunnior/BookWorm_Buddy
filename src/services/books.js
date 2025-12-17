@@ -43,7 +43,7 @@ async function fetchBooks(query) {
     if (!contentType || !contentType.includes("application/json")) {
       const text = await response.text();
       console.error("Expected JSON but got:", contentType);
-      console.error("Response text:", text.substring(0, 200));
+      console.error("Response text:", text.substring(0, 500));
       throw new Error(`Expected JSON response, got ${contentType}`);
     }
 

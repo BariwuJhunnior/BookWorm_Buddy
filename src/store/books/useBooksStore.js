@@ -6,6 +6,7 @@ const initState = {
   error: null,
   searchTerm: "",
   selectedBook: {},
+  bookCovers: {}, // Map of OLID for cover page URL
 };
 
 const useBooksStore = create((set) => ({
@@ -16,6 +17,14 @@ const useBooksStore = create((set) => ({
   selectedBook: (book) => set({ selectedBook: book }),
   setApiStatus: (status) => set({ ApiStatus: status }),
   setError: (error) => set({ error: error }),
+  setBookCover: (olid, coverUrl) =>
+    set((state) => ({
+      bookCovers: { ...state.bookCovers, [olid]: coverUrl },
+    })),
+  getBookCover: (olid) => {
+    const state = useBooksStore.getState();
+    return state.bookCovers[olid] || null;
+  },
   resetBookList: () => set({ ...initState }),
   clearSelectedBook: () => set({ selectedBook: {} }),
   clearBooksList: () => set({ books: [] }),

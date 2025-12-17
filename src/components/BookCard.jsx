@@ -15,7 +15,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   const languages = book.language ?? book.languages ?? ["Unknown"];
 
   return (
-    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start bg-gradient-to-r from-gray-800 to-blue-900">
+    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start ">
       <h2>
         <strong>Title: </strong>
         {title}

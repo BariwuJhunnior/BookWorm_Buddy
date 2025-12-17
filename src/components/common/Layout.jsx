@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-700 text-white">
       <header className="fixed top-0 left-0 w-full z-10 shadow-md">
-        <nav className="container mx-auto p-4  bg-gray-800 text-white transition-all duration-150">
+        <nav className="container mx-auto p-4  bg-gray-800 text-white transition-all duration-150 w-full">
           <ul>
             <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
               <Link to="/">Home</Link>
