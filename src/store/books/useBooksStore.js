@@ -11,6 +11,8 @@ const initState = {
   searchTerm: "",
   selectedBook: {},
   bookCovers: {},
+  currentPage: 1,
+  itemsPerPage: 10,
 };
 
 const useBooksStore = create(
@@ -33,11 +35,37 @@ const useBooksStore = create(
       },
       resetBookList: () => set({ ...initState }),
       clearSelectedBook: () => set({ selectedBook: {} }),
-      clearBooksList: () => set({ books: [] }),
+      clearBooksList: () => set({ books: [], currentPage: 1 }),
       deleteBookFromList: (bookId) =>
         set((state) => ({
           books: state.books.filter((book) => book.id !== bookId),
         })),
+      // Pagination functions
+      setCurrentPage: (page) => set({ currentPage: page }),
+      setItemsPerPage: (itemsPerPage) => set({ itemsPerPage, currentPage: 1 }),
+      getTotalPages: () => {
+        const state = useBooksStore.getState();
+        return Math.ceil(state.books.length / state.itemsPerPage);
+      },
+      getCurrentPageBooks: () => {
+        const state = useBooksStore.getState();
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        return state.books.slice(startIndex, endIndex);
+      },
+      goToNextPage: () => {
+        const state = useBooksStore.getState();
+        const totalPages = Math.ceil(state.books.length / state.itemsPerPage);
+        if (state.currentPage < totalPages) {
+          set({ currentPage: state.currentPage + 1 });
+        }
+      },
+      goToPreviousPage: () => {
+        const state = useBooksStore.getState();
+        if (state.currentPage > 1) {
+          set({ currentPage: state.currentPage - 1 });
+        }
+      },
       addToFavorites: (book) =>
         set((state) => {
           // Avoid duplicates by checking if book key already exists
