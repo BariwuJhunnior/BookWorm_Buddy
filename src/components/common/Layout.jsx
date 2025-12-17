@@ -16,7 +16,7 @@ const Layout = () => {
               <Link to="/favorites">Favorites</Link>
             </li>
             <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
-              <Link to="#">Reading List</Link>
+              <Link to="#">Reading</Link>
             </li>
           </ul>
         </nav>

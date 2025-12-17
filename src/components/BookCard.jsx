@@ -29,18 +29,6 @@ const BookCard = ({ index, book: bookProp } = {}) => {
 
   return (
     <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start">
-      <button
-        onClick={handleFavoriteClick}
-        className={`mb-3 flex items-center gap-2 px-3 py-1 rounded transition-all ${
-          isFav
-            ? "bg-red-500 text-white hover:bg-red-600"
-            : "bg-gray-300 text-gray-700 hover:bg-gray-400"
-        }`}
-      >
-        <FaHeart />
-        {isFav ? "Remove" : "Add to Favorites"}
-      </button>
-
       <h2>
         <strong>Title: </strong>
         {title}
@@ -53,10 +41,24 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         <strong>By:</strong>{" "}
         {Array.isArray(author_name) ? author_name[0] : author_name}
       </p>
-      <p>
+      <p className="pb-3">
         <strong>Language(s):</strong>{" "}
         {Array.isArray(languages) ? languages.join(", ") : languages}
       </p>
+
+      <div className="flex justify-end w-full">
+        <button
+          onClick={handleFavoriteClick}
+          className={`mb-1 flex items-center gap-2 px-1 py-1 rounded transition-all ${
+            isFav
+              ? "bg-red-400 text-white hover:bg-red-400 text-[12px] hover:cursor-pointer"
+              : "bg-gray-300 text-gray-700 hover:bg-gray-400 text-[12px] hover:cursor-pointer"
+          }`}
+        >
+          <FaHeart />
+          {isFav ? "Remove" : "Add to Favorites"}
+        </button>
+      </div>
     </div>
   );
 };
