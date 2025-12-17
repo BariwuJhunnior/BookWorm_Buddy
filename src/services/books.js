@@ -22,7 +22,7 @@ async function fetchBooks(query) {
   const searchURL = `${SearchBook}${encodedSearchTerm}`;
 
   if (ApiStatus === "pending") {
-    console.log("API request already in progress");
+    //console.log("API request already in progress");
     return;
   }
 

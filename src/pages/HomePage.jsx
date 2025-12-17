@@ -4,20 +4,30 @@ import BookDisplay from "../components/BookDisplay";
 import fetchBooks from "../services/books";
 import useBooksStore from "../store/books/useBooksStore";
 
-const DEFAULT_TERM = "life";
+const terms = [
+  "life",
+  "gold",
+  "king",
+  "happy",
+  "evil",
+  "money",
+  "soul",
+  "success",
+];
+
+const DEFAULT_TERM = terms[Math.floor(Math.random() * terms.length)];
 
 function HomePage() {
   const { books, ApiStatus, searchTerm } = useBooksStore();
 
   useEffect(() => {
-    const { searchTerm: storedTerm, setSearchTerm } = useBooksStore.getState();
+    // Always load random books when visiting home page
+    // This clears any previous search results
+    const { setSearchTerm, clearBooksList } = useBooksStore.getState();
 
-    if (!storedTerm || storedTerm.trim() === "") {
-      setSearchTerm(DEFAULT_TERM);
-      fetchBooks(DEFAULT_TERM);
-    } else {
-      fetchBooks(storedTerm);
-    }
+    clearBooksList();
+    setSearchTerm(DEFAULT_TERM);
+    fetchBooks(DEFAULT_TERM);
   }, []);
 
   const noResults =

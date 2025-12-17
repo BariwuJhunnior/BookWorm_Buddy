@@ -12,6 +12,12 @@ const Layout = () => {
             <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
               <Link to="/">Home</Link>
             </li>
+            <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
+              <Link to="#">Favorites</Link>
+            </li>
+            <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
+              <Link to="#">Reading List</Link>
+            </li>
           </ul>
         </nav>
       </header>
