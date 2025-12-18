@@ -4,7 +4,19 @@ import { FaSearch } from "react-icons/fa";
 import _ from "lodash";
 import fetchBooks from "../services/books";
 
-const DEFAULT_TERM = "life";
+const terms = [
+  "life",
+  "success",
+  "money",
+  "brain",
+  "rich",
+  "poor",
+  "old",
+  "wisdom",
+  "manipulation",
+];
+
+const DEFAULT_TERM = Math.floor(Math.random() * terms.length);
 
 const SearchBar = () => {
   const { setSearchTerm } = useBooksStore();

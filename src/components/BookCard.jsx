@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import useBooksStore from "../store/books/useBooksStore";
-import { FaHeart, FaBookmark, FaCheckCircle } from "react-icons/fa";
+import {
+  FaHeart,
+  FaBookmark,
+  FaCheckCircle,
+  FaRemoveFormat,
+  FaDumpster,
+} from "react-icons/fa";
+import { FaBasketShopping } from "react-icons/fa6";
 
 const BookCard = ({ index, book: bookProp } = {}) => {
   const {
@@ -119,11 +126,12 @@ const BookCard = ({ index, book: bookProp } = {}) => {
           <button
             className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
               isRead
-                ? "bg-green-500 text-white hover:bg-green-600 hover:cursor-pointer"
+                ? "bg-gray-300 text-gray-700 hover:bg-red-400 hover:cursor-pointer"
                 : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
             }`}
             onClick={handleDoneReadingClick}
           >
+            <FaDumpster size={14} />
             Remove
           </button>
         )}
