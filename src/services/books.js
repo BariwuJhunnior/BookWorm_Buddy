@@ -1,4 +1,5 @@
 import useBooksStore from "../store/books/useBooksStore";
+import { BookDetailsURL, BookSummaryURL } from "../config";
 
 const SearchBook = import.meta.env.VITE_OPEN_LIBRARY_BOOK_SEARCH_URL;
 
@@ -89,7 +90,99 @@ async function fetchBooks(query) {
   }
 }
 
+// Function to fetch individual book details
+async function fetchBookDetails(bookKey) {
+  if (!bookKey) {
+    throw new Error("Book key is required");
+  }
+
+  try {
+    // Handle different key formats from Open Library API
+    // Keys can be in format: "/works/OL12345W" or "/books/OL12345M"
+    let detailsURL;
+
+    if (bookKey.startsWith("/works/")) {
+      // It's a work ID
+      const workId = bookKey.replace("/works/", "");
+      detailsURL = `${BookDetailsURL}/works/${workId}.json`;
+    } else if (bookKey.startsWith("/books/")) {
+      // It's a book/edition ID
+      const bookId = bookKey.replace("/books/", "");
+      detailsURL = `${BookDetailsURL}/books/${bookId}.json`;
+    } else {
+      // Assume it's a work ID (most common case)
+      detailsURL = `${BookDetailsURL}/works/${bookKey}.json`;
+    }
+
+    console.log("Fetching book details from:", detailsURL);
+
+    const response = await fetch(detailsURL);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error(`Expected JSON response, got ${contentType}`);
+    }
+
+    const bookDetails = await response.json();
+    return bookDetails;
+  } catch (error) {
+    console.error("Error fetching book details:", error);
+    throw new Error("Could not fetch book details. Please try again.");
+  }
+}
+
+// Function to fetch book summary for BookCard component
+async function fetchBookSummary(workKey) {
+  if (!workKey) {
+    throw new Error("Work key is required");
+  }
+
+  try {
+    // Extract work ID from the key
+    let workId;
+    if (workKey.startsWith("/works/")) {
+      workId = workKey.replace("/works/", "");
+    } else {
+      workId = workKey;
+    }
+
+    const summaryURL = `${BookSummaryURL}/${workId}.json`;
+    console.log("Fetching book summary from:", summaryURL);
+
+    const response = await fetch(summaryURL);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error(`Expected JSON response, got ${contentType}`);
+    }
+
+    const bookData = await response.json();
+
+    // Extract description/summary from the response
+    const summary =
+      bookData.description ||
+      (bookData.description && bookData.description.value) ||
+      "No summary available for this book.";
+
+    return typeof summary === "string"
+      ? summary
+      : summary.value || "No summary available for this book.";
+  } catch (error) {
+    console.error("Error fetching book summary:", error);
+    return "Summary not available.";
+  }
+}
+
 // Fixed: Removed immediate execution - function should only be called when needed
 // fetchBooks();
 
+export { fetchBookDetails, fetchBookSummary };
 export default fetchBooks;
