@@ -114,7 +114,7 @@ async function fetchBookDetails(bookKey) {
       detailsURL = `${BookDetailsURL}/works/${bookKey}.json`;
     }
 
-    console.log("Fetching book details from:", detailsURL);
+    //console.log("Fetching book details from:", detailsURL);
 
     const response = await fetch(detailsURL);
 
@@ -151,7 +151,7 @@ async function fetchBookSummary(workKey) {
     }
 
     const summaryURL = `${BookSummaryURL}/${workId}.json`;
-    console.log("Fetching book summary from:", summaryURL);
+    //console.log("Fetching book summary from:", summaryURL);
 
     const response = await fetch(summaryURL);
 

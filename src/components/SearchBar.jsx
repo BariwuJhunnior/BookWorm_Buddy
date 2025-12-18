@@ -24,7 +24,7 @@ const SearchBar = () => {
   const debouncedFetchRef = useRef(
     _.debounce((term) => {
       fetchBooks(term);
-    }, 500)
+    }, 700)
   );
 
   useEffect(() => {

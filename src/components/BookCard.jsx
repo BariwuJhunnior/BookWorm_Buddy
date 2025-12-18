@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useBooksStore from "../store/books/useBooksStore";
 import { fetchBookSummary } from "../services/books";
+import BookDetailsModal from "./BookDetailsModal";
 import {
   FaHeart,
   FaBookmark,
   FaCheckCircle,
-  FaRemoveFormat,
   FaDumpster,
+  FaEye,
 } from "react-icons/fa";
-import { FaBasketShopping } from "react-icons/fa6";
 
 const BookCard = ({ index, book: bookProp } = {}) => {
   const navigate = useNavigate();
@@ -40,6 +40,9 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   const [summary, setSummary] = useState("Loading summary...");
   const [summaryLoading, setSummaryLoading] = useState(true);
 
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isFav, setIsFav] = useState(isFavorite(book.key));
   const [isInReading, setIsInReading] = useState(isInReadingList(book.key));
   const [isRead, setIsRead] = useState(isBookRead(book.key));
@@ -69,9 +72,20 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   }, [book.key]);
 
   const handleCardClick = () => {
+    // Keep the original navigation functionality
     if (book.key) {
+      //console.log("Navigating to book:", book.key);
       navigate(`/books/${book.key}`);
     }
+  };
+
+  const handleViewDetailsClick = (e) => {
+    e.stopPropagation(); // Prevent card click
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   const handleFavoriteClick = (e) => {
@@ -114,87 +128,106 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   };
 
   return (
-    <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start cursor-pointer hover:shadow-md transition-shadow">
-      <h2 className="mb-2">
-        <strong>Title: </strong>
-        {title}
-      </h2>
-      <p className="text-sm mb-1">
-        <strong>Published: </strong>
-        {first_publish_date}
-      </p>
-      <p className="text-sm mb-1">
-        <strong>By:</strong>{" "}
-        {Array.isArray(author_name) ? author_name[0] : author_name}
-      </p>
-      <p className="text-sm mb-3">
-        <strong>Language(s):</strong>{" "}
-        {Array.isArray(languages) ? languages.join(", ") : languages}
-      </p>
-
-      {/* Summary Section */}
-      <div className="mb-3 flex-grow">
-        <h4 className="text-sm font-semibold text-white mb-1">Summary:</h4>
-        <p className="text-xs text-white leading-relaxed">
-          {summaryLoading ? (
-            <span className="italic text-white">Loading summary...</span>
-          ) : (
-            truncateSummary(summary)
-          )}
+    <>
+      <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow">
+        <h2 className="mb-2">
+          <strong>Title: </strong>
+          {title}
+        </h2>
+        <p className="text-sm mb-1">
+          <strong>Published: </strong>
+          {first_publish_date}
         </p>
+        <p className="text-sm mb-1">
+          <strong>By:</strong>{" "}
+          {Array.isArray(author_name) ? author_name[0] : author_name}
+        </p>
+        <p className="text-sm mb-3">
+          <strong>Language(s):</strong>{" "}
+          {Array.isArray(languages) ? languages.join(", ") : languages}
+        </p>
+
+        {/* Summary Section */}
+        <div className="mb-3 flex-grow">
+          <h4 className="text-sm font-semibold text-white mb-1">Summary:</h4>
+          <p className="text-xs text-white leading-relaxed">
+            {summaryLoading ? (
+              <span className="italic text-white">Loading summary...</span>
+            ) : (
+              truncateSummary(summary)
+            )}
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-2 w-full justify-center flex-wrap mt-auto">
+          <button
+            onClick={handleViewDetailsClick}
+            className="mb-1 flex items-center gap-2 px-3 py-1 rounded transition-all text-sm bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+            title="View Details"
+          >
+            <FaEye size={14} />
+            View Details
+          </button>
+
+          <button
+            onClick={handleFavoriteClick}
+            className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
+              isFav
+                ? "bg-red-400 text-white hover:bg-red-500 hover:cursor-pointer"
+                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+            }`}
+          >
+            <FaHeart size={14} />
+            {isFav ? "Favorited" : "Favorite"}
+          </button>
+          <button
+            onClick={handleReadingListClick}
+            className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
+              isInReading
+                ? "bg-blue-400 text-white hover:bg-blue-500 hover:cursor-pointer"
+                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+            }`}
+          >
+            <FaBookmark size={14} />
+            {isInReading ? "Reading" : "Add to Reading"}
+          </button>
+          {isInReading && (
+            <button
+              onClick={handleDoneReadingClick}
+              className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
+                isRead
+                  ? "bg-green-500 text-white hover:bg-green-600 hover:cursor-pointer"
+                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+              }`}
+            >
+              <FaCheckCircle size={14} />
+              {isRead ? "Read" : "Mark Done"}
+            </button>
+          )}
+          {isRead && (
+            <button
+              className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
+                isRead
+                  ? "bg-gray-300 text-gray-700 hover:bg-red-400 hover:cursor-pointer"
+                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+              }`}
+              onClick={handleDoneReadingClick}
+            >
+              <FaDumpster size={14} />
+              Remove
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="flex gap-2 w-full justify-center flex-wrap mt-auto">
-        <button
-          onClick={handleFavoriteClick}
-          className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
-            isFav
-              ? "bg-red-400 text-white hover:bg-red-500 hover:cursor-pointer"
-              : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
-          }`}
-        >
-          <FaHeart size={14} />
-          {isFav ? "Favorited" : "Favorite"}
-        </button>
-        <button
-          onClick={handleReadingListClick}
-          className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
-            isInReading
-              ? "bg-blue-400 text-white hover:bg-blue-500 hover:cursor-pointer"
-              : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
-          }`}
-        >
-          <FaBookmark size={14} />
-          {isInReading ? "Reading" : "Add to Reading"}
-        </button>
-        {isInReading && (
-          <button
-            onClick={handleDoneReadingClick}
-            className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
-              isRead
-                ? "bg-green-500 text-white hover:bg-green-600 hover:cursor-pointer"
-                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
-            }`}
-          >
-            <FaCheckCircle size={14} />
-            {isRead ? "Read" : "Mark Done"}
-          </button>
-        )}
-        {isRead && (
-          <button
-            className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
-              isRead
-                ? "bg-gray-300 text-gray-700 hover:bg-red-400 hover:cursor-pointer"
-                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
-            }`}
-            onClick={handleDoneReadingClick}
-          >
-            <FaDumpster size={14} />
-            Remove
-          </button>
-        )}
-      </div>
-    </div>
+      {/* Book Details Modal */}
+      <BookDetailsModal
+        book={book}
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+      />
+    </>
   );
 };
 
