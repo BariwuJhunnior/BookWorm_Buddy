@@ -223,7 +223,9 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div>
-                      <p className="text-sm text-gray-400">Published</p>
+                      <p className="text-sm text-gray-400 font-bold">
+                        Published
+                      </p>
                       <p className="text-white">
                         {modalBookDetails.publishDate}
                       </p>
@@ -232,14 +234,16 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
 
                   <div className="flex items-center gap-3">
                     <div>
-                      <p className="text-sm text-gray-400">Language(s)</p>
+                      <p className="text-sm text-gray-400 font-bold">
+                        Language(s)
+                      </p>
                       <p className="text-white">{modalBookDetails.languages}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <div>
-                      <p className="text-sm text-gray-400">Pages</p>
+                      <p className="text-sm text-gray-400 font-bold">Pages</p>
                       <p className="text-white">
                         {modalBookDetails.numberOfPages}
                       </p>
@@ -251,7 +255,9 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div>
-                      <p className="text-sm text-gray-400">Publisher(s)</p>
+                      <p className="text-sm text-gray-400 font-bold">
+                        Publisher(s)
+                      </p>
                       <p className="text-white">
                         {modalBookDetails.publishers}
                       </p>
@@ -260,7 +266,9 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
 
                   <div className="flex items-start gap-3">
                     <div>
-                      <p className="text-sm text-gray-400">Subjects</p>
+                      <p className="text-sm text-gray-400 font-bold">
+                        Subjects
+                      </p>
                       <p className="text-white text-sm">
                         {modalBookDetails.subjects}
                       </p>
@@ -271,9 +279,7 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
 
               {/* Summary Section */}
               <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-3 text-white">
-                  Summary
-                </h2>
+                <h2 className="text-xl font-bold mb-3 text-white">Summary</h2>
                 <div className="bg-gray-700 rounded-lg p-4">
                   <p className="text-gray-200 leading-relaxed whitespace-pre-wrap">
                     {summary}
