@@ -129,7 +129,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
 
   return (
     <>
-      <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow">
+      <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow wrap-break-word">
         <h2 className="mb-2">
           <strong>Title: </strong>
           {title}
