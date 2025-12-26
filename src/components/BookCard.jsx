@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useBooksStore from "../store/books/useBooksStore";
-import { fetchBookSummary, generateBookCoverURL } from "../services/books";
+import {
+  fetchBookDetails,
+  fetchBookSummary,
+  generateBookCoverURL,
+} from "../services/books";
 import BookDetailsModal from "./BookDetailsModal";
 import {
   FaHeart,
@@ -9,6 +13,7 @@ import {
   FaCheckCircle,
   FaDumpster,
   FaEye,
+  FaBookOpen,
 } from "react-icons/fa";
 
 const BookCard = ({ index, book: bookProp } = {}) => {
@@ -194,6 +199,35 @@ const BookCard = ({ index, book: bookProp } = {}) => {
           >
             <FaHeart size={14} />
             {isFav ? "Favorited" : "Favorite"}
+          </button>
+          <button
+            onClick={async (e) => {
+              e.stopPropagation();
+              if (book.key) {
+                try {
+                  const details = await fetchBookDetails(book.key);
+                  if (details.ocaid) {
+                    window.open(
+                      `https://archive.org/details/${details.ocaid}`,
+                      "_blank"
+                    );
+                  } else {
+                    window.open(`https://openlibrary.org${book.key}`, "_blank");
+                  }
+                } catch (error) {
+                  console.error(
+                    "Error fetching book details for reading:",
+                    error
+                  );
+                  window.open(`https://openlibrary.org${book.key}`, "_blank");
+                }
+              }
+            }}
+            className="mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm bg-blue-300 text-gray-700 hover:bg-blue-400 hover:cursor-pointer"
+            title="Read Online"
+          >
+            <FaBookOpen size={14} />
+            Read
           </button>
           <button
             onClick={handleReadingListClick}
