@@ -38,13 +38,11 @@ const SearchBar = () => {
   const handleChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    // if the user cleared the input, immediately restore default results
+    // if the user cleared the input, keep the current searched books
     if (!value || value.trim() === "") {
       if (debouncedFetchRef.current && debouncedFetchRef.current.cancel) {
         debouncedFetchRef.current.cancel();
       }
-      setSearchTerm(DEFAULT_TERM);
-      fetchBooks(DEFAULT_TERM);
       return;
     }
 
