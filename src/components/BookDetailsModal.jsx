@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchBookDetails } from "../services/books";
+import { fetchBookDetails, generateBookCoverURL } from "../services/books";
 import useBooksStore from "../store/books/useBooksStore";
 import {
   FaHeart,
@@ -14,6 +14,7 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [summary, setSummary] = useState("");
+  const [coverURL, setCoverURL] = useState(null);
 
   const {
     addToFavorites,
@@ -49,6 +50,7 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
       setError(null);
       const details = await fetchBookDetails(book.key);
       setBookDetails(details);
+      setCoverURL(generateBookCoverURL(book));
 
       // Set favorites and reading list states
       setIsFav(isFavorite(book.key));
@@ -216,6 +218,17 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
                   <span className="text-lg">{modalBookDetails.authors}</span>
                 </div>
               </div>
+
+              {/* Cover Image */}
+              {coverURL && (
+                <div className="mb-6 flex justify-center">
+                  <img
+                    src={coverURL}
+                    alt={`${modalBookDetails.title} cover`}
+                    className="w-90 h-64 object-cover rounded-lg shadow-lg"
+                  />
+                </div>
+              )}
 
               {/* Book Information Grid */}
               <div className="grid md:grid-cols-2 gap-6 mb-6">
