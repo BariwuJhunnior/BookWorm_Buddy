@@ -184,12 +184,12 @@ async function fetchBookSummary(workKey) {
 // Function to generate book cover URL
 
 function generateBookCoverURL(book) {
-  console.log(
+  /* console.log(
     "Debug: Generating cover URL for book:",
     book?.title,
     "cover_i:",
     book?.cover_i
-  );
+  ); */
 
   if (!book || !book.cover_i) {
     //console.log("Debug: No cover_i available, returning null");
@@ -197,7 +197,7 @@ function generateBookCoverURL(book) {
     return null;
   }
 
-  const url = `${BookCoverURL}/b/id/${book.cover_i}-L.jpg`;
+  const url = `${BookCoverURL}/b/id/${book.cover_i}-M.jpg`;
 
   //console.log("Debug: Generated cover URL:", url);
 

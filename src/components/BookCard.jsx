@@ -53,7 +53,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   // Fetch book summary when component mounts or book key changes
   useEffect(() => {
     const loadSummary = async () => {
-      console.log("Debug: BookCard loading for book:", book);
+      //console.log("Debug: BookCard loading for book:", book);
       if (!book.key) {
         setSummary("No summary available");
         setSummaryLoading(false);
@@ -65,7 +65,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         const bookSummary = await fetchBookSummary(book.key);
         setSummary(bookSummary);
         setCoverURL(generateBookCoverURL(book));
-        console.log("Debug: Cover URL set to:", generateBookCoverURL(book));
+        //console.log("Debug: Cover URL set to:", generateBookCoverURL(book));
       } catch (error) {
         console.error("Error loading book summary:", error);
         setSummary("Summary not available");
@@ -140,7 +140,8 @@ const BookCard = ({ index, book: bookProp } = {}) => {
           <img
             src={coverURL}
             alt={`${title} cover`}
-            className="w-full h-48 object-cover rounded-t-xl mb-2"
+            className="w-full h-60 object-cover rounded-t-xl mb-2"
+            size={20}
           />
         )}
         <h2 className="mb-2">
