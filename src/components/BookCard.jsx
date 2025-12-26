@@ -144,13 +144,16 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   return (
     <>
       <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow wrap-break-word">
-        {coverURL && (
+        {coverURL ? (
           <img
             src={coverURL}
             alt={`${title} cover`}
             className="w-full h-60 object-cover rounded-t-xl mb-2"
-            size={20}
           />
+        ) : (
+          <div className="w-full h-60 flex items-center justify-center bg-gray-200 rounded-t-xl mb-2">
+            <span className="text-gray-600">No cover available</span>
+          </div>
         )}
         <h2 className="mb-2">
           <strong>Title: </strong>
