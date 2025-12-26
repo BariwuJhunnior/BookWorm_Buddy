@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useBooksStore from "../store/books/useBooksStore";
-import { fetchBookSummary } from "../services/books";
+import { fetchBookSummary, generateBookCoverURL } from "../services/books";
 import BookDetailsModal from "./BookDetailsModal";
 import {
   FaHeart,
@@ -40,6 +40,9 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   const [summary, setSummary] = useState("Loading summary...");
   const [summaryLoading, setSummaryLoading] = useState(true);
 
+  // State for cover URL
+  const [coverURL, setCoverURL] = useState(null);
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -50,6 +53,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   // Fetch book summary when component mounts or book key changes
   useEffect(() => {
     const loadSummary = async () => {
+      console.log("Debug: BookCard loading for book:", book);
       if (!book.key) {
         setSummary("No summary available");
         setSummaryLoading(false);
@@ -60,6 +64,8 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         setSummaryLoading(true);
         const bookSummary = await fetchBookSummary(book.key);
         setSummary(bookSummary);
+        setCoverURL(generateBookCoverURL(book));
+        console.log("Debug: Cover URL set to:", generateBookCoverURL(book));
       } catch (error) {
         console.error("Error loading book summary:", error);
         setSummary("Summary not available");
@@ -130,6 +136,13 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   return (
     <>
       <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow wrap-break-word">
+        {coverURL && (
+          <img
+            src={coverURL}
+            alt={`${title} cover`}
+            className="w-full h-48 object-cover rounded-t-xl mb-2"
+          />
+        )}
         <h2 className="mb-2">
           <strong>Title: </strong>
           {title}
@@ -148,7 +161,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         </p>
 
         {/* Summary Section */}
-        <div className="mb-3 flex-grow">
+        <div className="mb-3 grow">
           <h4 className="text-sm font-semibold text-white mb-1">Summary:</h4>
           <p className="text-xs text-white leading-relaxed">
             {summaryLoading ? (

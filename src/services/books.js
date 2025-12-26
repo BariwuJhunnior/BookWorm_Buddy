@@ -1,5 +1,5 @@
 import useBooksStore from "../store/books/useBooksStore";
-import { BookDetailsURL, BookSummaryURL } from "../config";
+import { BookDetailsURL, BookSummaryURL, BookCoverURL } from "../config";
 
 const SearchBook = import.meta.env.VITE_OPEN_LIBRARY_BOOK_SEARCH_URL;
 
@@ -181,8 +181,31 @@ async function fetchBookSummary(workKey) {
   }
 }
 
+// Function to generate book cover URL
+
+function generateBookCoverURL(book) {
+  console.log(
+    "Debug: Generating cover URL for book:",
+    book?.title,
+    "cover_i:",
+    book?.cover_i
+  );
+
+  if (!book || !book.cover_i) {
+    //console.log("Debug: No cover_i available, returning null");
+
+    return null;
+  }
+
+  const url = `${BookCoverURL}/b/id/${book.cover_i}-L.jpg`;
+
+  //console.log("Debug: Generated cover URL:", url);
+
+  return url;
+}
+
 // Fixed: Removed immediate execution - function should only be called when needed
 // fetchBooks();
 
-export { fetchBookDetails, fetchBookSummary };
+export { fetchBookDetails, fetchBookSummary, generateBookCoverURL };
 export default fetchBooks;
