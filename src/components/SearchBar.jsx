@@ -50,7 +50,7 @@ const SearchBar = () => {
     debouncedFetchRef.current(value);
   };
   return (
-    <div className="flex items-center gap-5 bg-transparent] px-4 py-2 rounded-full md:max-w-[40%] max-w-[80%] sm:max-w-[80%] xs:max-w-[30%] border-solid border-2 border-white text-white mx-auto my-[1em] justify-between mt-20 ">
+    <div className="flex items-center gap-5  px-4 py-2 rounded-full md:max-w-[40%] max-w-[80%] sm:max-w-[80%] xs:max-w-[30%] border-solid border-2 border-white text-white mx-auto my-[1em] justify-between mt-20 ">
       <input
         type="text"
         name=""
