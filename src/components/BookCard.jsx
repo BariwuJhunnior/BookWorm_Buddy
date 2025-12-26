@@ -47,6 +47,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
 
   // State for cover URL
   const [coverURL, setCoverURL] = useState(null);
+  const [canRead, setCanRead] = useState(false);
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -69,8 +70,10 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         setSummaryLoading(true);
         const bookSummary = await fetchBookSummary(book.key);
         setSummary(bookSummary);
-        setCoverURL(generateBookCoverURL(book));
-        //console.log("Debug: Cover URL set to:", generateBookCoverURL(book));
+        const url = generateBookCoverURL(book);
+        setCoverURL(url);
+        setCanRead(!!(book.public_scan_b || book.lending_edition_s));
+        //console.log("Debug: Cover URL set to:", url);
       } catch (error) {
         console.error("Error loading book summary:", error);
         setSummary("Summary not available");
@@ -182,7 +185,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
         <div className="flex gap-2 w-full justify-center flex-wrap mt-auto">
           <button
             onClick={handleViewDetailsClick}
-            className="mb-1 flex items-center gap-2 px-3 py-1 rounded transition-all text-sm bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+            className="mb-1 flex items-center gap-2 px-3 py-1 rounded transition-all text-sm bg-gray-300 text-gray-700 hover:bg-gray-400"
             title="View Details"
           >
             <FaEye size={14} />
@@ -193,48 +196,53 @@ const BookCard = ({ index, book: bookProp } = {}) => {
             onClick={handleFavoriteClick}
             className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
               isFav
-                ? "bg-red-400 text-white hover:bg-red-500 hover:cursor-pointer"
-                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+                ? "bg-red-400 text-white hover:bg-red-500 "
+                : "bg-gray-300 text-gray-700 hover:bg-gray-400 "
             }`}
           >
             <FaHeart size={14} />
             {isFav ? "Favorited" : "Favorite"}
           </button>
-          <button
-            onClick={async (e) => {
-              e.stopPropagation();
-              if (book.key) {
-                try {
-                  const details = await fetchBookDetails(book.key);
-                  if (details.ocaid) {
-                    window.open(
-                      `https://archive.org/details/${details.ocaid}`,
-                      "_blank"
+          {canRead && (
+            <button
+              onClick={async (e) => {
+                e.stopPropagation();
+                if (book.key) {
+                  try {
+                    const details = await fetchBookDetails(book.key);
+                    if (details.ocaid) {
+                      window.open(
+                        `https://archive.org/details/${details.ocaid}`,
+                        "_blank"
+                      );
+                    } else {
+                      window.open(
+                        `https://openlibrary.org${book.key}`,
+                        "_blank"
+                      );
+                    }
+                  } catch (error) {
+                    console.error(
+                      "Error fetching book details for reading:",
+                      error
                     );
-                  } else {
                     window.open(`https://openlibrary.org${book.key}`, "_blank");
                   }
-                } catch (error) {
-                  console.error(
-                    "Error fetching book details for reading:",
-                    error
-                  );
-                  window.open(`https://openlibrary.org${book.key}`, "_blank");
                 }
-              }
-            }}
-            className="mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm bg-blue-300 text-gray-700 hover:bg-blue-400 hover:cursor-pointer"
-            title="Read Online"
-          >
-            <FaBookOpen size={14} />
-            Read
-          </button>
+              }}
+              className="mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm bg-blue-300 text-gray-700 hover:bg-blue-400 "
+              title="Read Online"
+            >
+              <FaBookOpen size={14} />
+              Read
+            </button>
+          )}
           <button
             onClick={handleReadingListClick}
             className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
               isInReading
-                ? "bg-blue-400 text-white hover:bg-blue-500 hover:cursor-pointer"
-                : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+                ? "bg-blue-400 text-white hover:bg-blue-500 "
+                : "bg-gray-300 text-gray-700 hover:bg-gray-400 "
             }`}
           >
             <FaBookmark size={14} />
@@ -245,8 +253,8 @@ const BookCard = ({ index, book: bookProp } = {}) => {
               onClick={handleDoneReadingClick}
               className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
                 isRead
-                  ? "bg-green-500 text-white hover:bg-green-600 hover:cursor-pointer"
-                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+                  ? "bg-green-500 text-white hover:bg-green-600 "
+                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 "
               }`}
             >
               <FaCheckCircle size={14} />
@@ -257,8 +265,8 @@ const BookCard = ({ index, book: bookProp } = {}) => {
             <button
               className={`mb-1 flex items-center gap-2 px-2 py-1 rounded transition-all text-sm ${
                 isRead
-                  ? "bg-gray-300 text-gray-700 hover:bg-red-400 hover:cursor-pointer"
-                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 hover:cursor-pointer"
+                  ? "bg-gray-300 text-gray-700 hover:bg-red-400 "
+                  : "bg-gray-300 text-gray-700 hover:bg-gray-400 "
               }`}
               onClick={handleDoneReadingClick}
             >
