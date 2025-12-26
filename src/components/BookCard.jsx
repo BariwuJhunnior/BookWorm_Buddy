@@ -143,7 +143,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
 
   return (
     <>
-      <div className="border-2 p-4 rounded-xl shadow-xs max-w-sm flex flex-col items-start hover:shadow-md transition-shadow wrap-break-word">
+      <div className="border border-white/20 p-4 rounded-xl bg-gray-800/10 backdrop-blur-sm max-w-sm flex flex-col items-start hover:shadow-lg hover:bg-gray-800/20 transition-all duration-300 wrap-break-word">
         {coverURL ? (
           <img
             src={coverURL}
