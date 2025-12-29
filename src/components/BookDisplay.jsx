@@ -99,7 +99,7 @@ const PaginationControls = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 bg-gray-700  p-3 rounded-lg shadow-sm border-none">
+    <div className="flex items-center gap-2 bg-gray-700  p-3 rounded-lg shadow-sm border-none ">
       {/* Previous Button */}
       <button
         onClick={goToPreviousPage}
