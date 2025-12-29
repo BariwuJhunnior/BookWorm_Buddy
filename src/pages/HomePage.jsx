@@ -7,13 +7,14 @@ import useBooksStore from "../store/books/useBooksStore";
 
 const terms = [
   "life",
-  "gold",
-  "king",
-  "happy",
-  "evil",
-  "money",
-  "soul",
   "success",
+  "money",
+  "brain",
+  "rich",
+  "poor",
+  "old",
+  "wisdom",
+  "manipulation",
 ];
 
 function HomePage() {
