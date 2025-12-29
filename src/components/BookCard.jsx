@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import useBooksStore from "../store/books/useBooksStore";
 import {
   fetchBookDetails,
@@ -17,7 +16,6 @@ import {
 } from "react-icons/fa";
 
 const BookCard = ({ index, book: bookProp } = {}) => {
-  const navigate = useNavigate();
   const {
     books,
     addToFavorites,
@@ -85,14 +83,6 @@ const BookCard = ({ index, book: bookProp } = {}) => {
     loadSummary();
   }, [book.key]);
 
-  const handleCardClick = () => {
-    // Keep the original navigation functionality
-    if (book.key) {
-      //console.log("Navigating to book:", book.key);
-      navigate(`/books/${book.key}`);
-    }
-  };
-
   const handleViewDetailsClick = (e) => {
     e.stopPropagation(); // Prevent card click
     setIsModalOpen(true);
@@ -135,7 +125,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
     }
   };
 
-  // Truncate summary if it's too long
+  // Shorten summary if it's too long
   const truncateSummary = (text, maxLength = 150) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";

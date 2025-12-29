@@ -13,7 +13,6 @@ async function fetchBooks(query) {
       ? query.trim()
       : searchTerm;
 
-  // Don't proceed if no search term
   if (!term || term.trim() === "") {
     return;
   }

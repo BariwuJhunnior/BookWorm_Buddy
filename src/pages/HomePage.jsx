@@ -23,9 +23,7 @@ function HomePage() {
 
   useEffect(() => {
     // Only initialize default/random books when there is no existing
-    // books list and no search term. This preserves the user's
-    // previous books and search box value when they navigate away
-    // and return to Home.
+    // books list and no search term.
     const state = useBooksStore.getState();
 
     // If there are already books in the store, keep them intact

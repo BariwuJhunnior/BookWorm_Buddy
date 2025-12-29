@@ -2,14 +2,14 @@ import React from "react";
 import useRandomBooksStore from "../store/books/useRandomBooksStore";
 
 async function fetchRandomBooks() {
-  const { books, ApiStatus, error, updateBooksList, setApiStatus, setError } =
+  const { ApiStatus, updateBooksList, setApiStatus, setError } =
     useRandomBooksStore.getState();
 
   const RandomBooksURL = import.meta.env
     .VITE_OPEN_LIBRARY_RANDOM_BOOKS_ENDPOINT;
 
   if (ApiStatus === "pending") {
-    console.log("API Request In Progress...");
+    //console.log("API Request In Progress...");
     return;
   }
 
