@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Outlet, Link } from "react-router";
+import { FaHome } from "react-icons/fa";
 
 const Layout = () => {
   return (
@@ -44,7 +45,9 @@ const Layout = () => {
             {/* Navigation Links */}
             <ul className="flex gap-5">
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
-                <Link to="/">Home</Link>
+                <Link to="/">
+                  <FaHome size={30} />
+                </Link>
               </li>
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
                 <Link to="/favorites">Favorites</Link>
@@ -65,9 +68,15 @@ const Layout = () => {
         <Outlet />
       </main>
 
-      <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg">
+      <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex flex-col justify-center items-center">
+        {/* Logo */}
+        <div className="flex items-center">
+          <div className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(139,92.245,0.8 mb-3">
+            BookWorm Buddy
+          </div>
+        </div>
         <div className="container mx-auto text-center">
-          &copy; 2025 BookWorm Buddy
+          &copy; 2026 BookWorm Buddy
         </div>
       </footer>
     </div>

@@ -67,7 +67,6 @@ const SearchBar = () => {
         className="outline-none border-none active:border-none bg-none w-125"
       />
       <div className="flex gap-2">
-        <FaHome onClick={handleHome} className="cursor-pointer" />
         <FaSearch />
       </div>
     </div>
