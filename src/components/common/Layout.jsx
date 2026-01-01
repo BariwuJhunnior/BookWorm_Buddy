@@ -18,7 +18,7 @@ const Layout = () => {
         ></div>
       </div>
 
-      {/* Floating Elements */}
+      {/* Floating Elements In The Background */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
       <div
         className="absolute top-40 right-20 w-24 h-24 bg-purple-500/10 rounded-full blur-xl animate-pulse"
@@ -45,11 +45,6 @@ const Layout = () => {
             {/* Navigation Links */}
             <ul className="flex gap-5">
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
-                <Link to="/">
-                  <FaHome size={30} />
-                </Link>
-              </li>
-              <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
                 <Link to="/favorites">Favorites</Link>
               </li>
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
@@ -57,6 +52,11 @@ const Layout = () => {
               </li>
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
                 <Link to="/books-read">Books Read</Link>
+              </li>
+              <li className="transition-all duration-150 hover:opacity-80 active:opacity-100 ml-5">
+                <Link to="/">
+                  <FaHome size={30} />
+                </Link>
               </li>
             </ul>
           </div>

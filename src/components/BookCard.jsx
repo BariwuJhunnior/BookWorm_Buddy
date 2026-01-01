@@ -47,7 +47,7 @@ const BookCard = ({ index, book: bookProp } = {}) => {
   const [coverURL, setCoverURL] = useState(null);
   const [canRead, setCanRead] = useState(false);
 
-  // Modal state
+  // Book Detail Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [isFav, setIsFav] = useState(isFavorite(book.key));

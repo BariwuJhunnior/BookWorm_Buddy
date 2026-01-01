@@ -38,7 +38,7 @@ const BookDisplay = () => {
   );
 };
 
-// Separate Pagination Controls Component
+// Pagination Controls Component
 const PaginationControls = () => {
   const {
     currentPage,

@@ -4,6 +4,7 @@ import { FaSearch, FaHome } from "react-icons/fa";
 import _ from "lodash";
 import fetchBooks from "../services/books";
 
+// Random Search Terms For When The Page Is Refreshed or On Website First Opens
 const terms = [
   "life",
   "success",
@@ -52,7 +53,7 @@ const SearchBar = () => {
       return;
     }
     setSearchTerm(value);
-    // call fetchBooks 500ms after user stops typing, passing the latest value
+    // call fetchBooks 1s after user stops typing, passing the latest value
     debouncedFetchRef.current(value);
   };
   return (
