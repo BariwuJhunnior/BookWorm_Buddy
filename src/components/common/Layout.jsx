@@ -81,7 +81,7 @@ const Layout = () => {
         <Outlet />
       </main>
 
-      <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex flex-col justify-center items-center">
+      <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex text-[12px] justify-center items-center">
         {/* Logo */}
         <div className="flex items-center justify-center p-1 bg-transparent">
           <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
@@ -100,8 +100,8 @@ const Layout = () => {
         </div>
 
         {/* Contact Us */}
-        <div className="mt-5 text-2xl mb-3 font-extrabold">Contact Us</div>
-        <div className="flex gap-5">
+        <div className=" text-1xl mb-3 font-bold">Contact Us</div>
+        <div className="flex gap-3">
           <h3>
             <FaFacebook
               size={20}
