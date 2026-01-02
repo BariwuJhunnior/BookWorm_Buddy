@@ -60,7 +60,7 @@ const PaginationControls = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 bg-gray-700  p-3 rounded-lg shadow-sm border-none ">
+    <div className="flex items-center gap-2 bg-gray-500  p-3 rounded-lg shadow-sm border-none ">
       {/* Previous Button */}
       <button
         onClick={goToPreviousPage}
@@ -68,7 +68,7 @@ const PaginationControls = () => {
         className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
           currentPage === 1
             ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            : "bg-blue-400 text-white hover:bg-blue-600 transition-all duration-300"
         }`}
       >
         Previous
@@ -85,8 +85,8 @@ const PaginationControls = () => {
                 onClick={() => handlePageClick(page)}
                 className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                   currentPage === page
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-blue-400 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-300"
                 }`}
               >
                 {page}
@@ -103,7 +103,7 @@ const PaginationControls = () => {
         className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
           currentPage === totalPages
             ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            : "bg-blue-400 text-white hover:bg-blue-500 transition-all duration-300"
         }`}
       >
         Next

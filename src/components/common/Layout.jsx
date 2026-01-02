@@ -2,7 +2,13 @@ import React from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Outlet, Link } from "react-router";
-import { FaHome } from "react-icons/fa";
+import {
+  FaHome,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaMailBulk,
+} from "react-icons/fa";
 
 const Layout = () => {
   return (
@@ -36,10 +42,17 @@ const Layout = () => {
         <nav className="px-4 py-4 bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center">
-              <div className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] ">
-                BookWorm Buddy
-              </div>
+            <div className="flex items-center justify-center p-4 bg-transparent">
+              <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
+                <span className="drop-shadow-sm">BookWorm</span>
+
+                <span className="relative ml-2 text-blue-400">
+                  Buddy
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-slate-400 rounded-full -z-10"></span>
+                </span>
+
+                <span className="text-slate-400 ml-0.5">.</span>
+              </h1>
             </div>
 
             {/* Navigation Links */}
@@ -70,13 +83,49 @@ const Layout = () => {
 
       <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex flex-col justify-center items-center">
         {/* Logo */}
-        <div className="flex items-center">
-          <div className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(139,92.245,0.8 mb-3">
-            BookWorm Buddy
-          </div>
+        <div className="flex items-center justify-center p-4 bg-transparent">
+          <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
+            <span className="drop-shadow-sm">BookWorm</span>
+
+            <span className="relative ml-2 text-blue-400 shadow">
+              Buddy
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-slate-400 rounded-full -z-10"></span>
+            </span>
+
+            <span className="text-slate-400 ml-0.5">.</span>
+          </h1>
         </div>
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto text-center text-bold">
           &copy; 2026 BookWorm Buddy
+        </div>
+
+        {/* Contact Us */}
+        <div className="mt-5 text-2xl mb-3 font-extrabold">Contact Us</div>
+        <div className="flex gap-5">
+          <h3>
+            <FaFacebook
+              size={20}
+              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+            />
+          </h3>
+          <h3>
+            <FaInstagram
+              size={20}
+              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+            />
+          </h3>
+          <h3>
+            <FaTwitter
+              size={20}
+              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+            />
+          </h3>
+          <h3>
+            <FaMailBulk
+              size={20}
+              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+            />
+          </h3>
         </div>
       </footer>
     </div>
