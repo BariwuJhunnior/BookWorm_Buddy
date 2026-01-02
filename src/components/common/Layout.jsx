@@ -81,7 +81,7 @@ const Layout = () => {
         <Outlet />
       </main>
 
-      <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex text-[12px] justify-center items-center">
+      <footer className="px-6 py-4 mt-auto bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg grid grid-cols-3 text-[12px] place-items-center">
         {/* Logo */}
         <div className="flex items-center justify-center p-1 bg-transparent">
           <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
@@ -95,37 +95,41 @@ const Layout = () => {
             <span className="text-slate-400 ml-0.5">.</span>
           </h1>
         </div>
+
+        {/* Copyright */}
         <div className="container mx-auto text-center text-bold">
           &copy; 2026 BookWorm Buddy
         </div>
 
         {/* Contact Us */}
-        <div className=" text-1xl mb-3 font-bold">Contact Us</div>
-        <div className="flex gap-3">
-          <h3>
-            <FaFacebook
-              size={20}
-              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-            />
-          </h3>
-          <h3>
-            <FaInstagram
-              size={20}
-              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-            />
-          </h3>
-          <h3>
-            <FaTwitter
-              size={20}
-              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-            />
-          </h3>
-          <h3>
-            <FaMailBulk
-              size={20}
-              className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-            />
-          </h3>
+        <div className="flex flex-col items-center">
+          <div className="mb-3 font-bold">Contact Us :</div>
+          <div className="flex gap-3">
+            <h3>
+              <FaFacebook
+                size={20}
+                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </h3>
+            <h3>
+              <FaInstagram
+                size={20}
+                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </h3>
+            <h3>
+              <FaTwitter
+                size={20}
+                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </h3>
+            <h3>
+              <FaMailBulk
+                size={20}
+                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </h3>
+          </div>
         </div>
       </footer>
     </div>

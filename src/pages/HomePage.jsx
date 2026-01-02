@@ -15,6 +15,9 @@ const terms = [
   "old",
   "wisdom",
   "manipulation",
+  "purpose",
+  "leadership",
+  "confidence",
 ];
 
 function HomePage() {
