@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Outlet, Link } from "react-router";
 import {
   FaHome,
+  FaBars,
   FaFacebook,
   FaInstagram,
   FaTwitter,
@@ -11,6 +12,8 @@ import {
 } from "react-icons/fa";
 
 const Layout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="flex flex-col min-h-screen bg-linear-to-br from-gray-900 via-gray-700 to-gray-900 text-white relative overflow-hidden">
       {/* Background Pattern */}
@@ -56,7 +59,7 @@ const Layout = () => {
             </div>
 
             {/* Navigation Links */}
-            <ul className="flex gap-5">
+            <ul className="hidden md:flex gap-5">
               <li className="transition-all duration-150 hover:opacity-80 active:opacity-100">
                 <Link to="/favorites">Favorites</Link>
               </li>
@@ -72,7 +75,45 @@ const Layout = () => {
                 </Link>
               </li>
             </ul>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden ml-4 cursor-pointer hover:text-gray-300 transition-all duration-150 active:text-gray-100"
+            >
+              <FaBars size={24} />
+            </button>
           </div>
+          {isOpen && (
+            <div className="absolute top-full left-0 w-full bg-gray-800/90 backdrop-blur-md border-b border-white/10 md:hidden">
+              <ul className="flex flex-col items-center gap-4 p-4">
+                <li
+                  className="transition-all duration-150 hover:opacity-80 active:opacity-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/favorites">Favorites</Link>
+                </li>
+                <li
+                  className="transition-all duration-150 hover:opacity-80 active:opacity-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/reading-list">Reading List</Link>
+                </li>
+                <li
+                  className="transition-all duration-150 hover:opacity-80 active:opacity-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/books-read">Books Read</Link>
+                </li>
+                <li
+                  className="transition-all duration-150 hover:opacity-80 active:opacity-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/">
+                    <FaHome size={30} />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </nav>
       </header>
 
