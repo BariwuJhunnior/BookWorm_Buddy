@@ -42,7 +42,7 @@ const Layout = () => {
         <nav className="px-4 py-4 bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center justify-center p-4 bg-transparent">
+            <div className="flex items-center justify-center p-0 bg-transparent">
               <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
                 <span className="drop-shadow-sm">BookWorm</span>
 
@@ -83,7 +83,7 @@ const Layout = () => {
 
       <footer className="p-4 mt-auto  bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg flex flex-col justify-center items-center">
         {/* Logo */}
-        <div className="flex items-center justify-center p-4 bg-transparent">
+        <div className="flex items-center justify-center p-1 bg-transparent">
           <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
             <span className="drop-shadow-sm">BookWorm</span>
 
