@@ -9,6 +9,7 @@ import {
   FaInstagram,
   FaTwitter,
   FaMailBulk,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 const Layout = () => {
@@ -146,34 +147,65 @@ const Layout = () => {
         <div className="flex flex-col items-center">
           <div className="mb-3 font-bold">Contact Us :</div>
           <div className="flex gap-3">
-            <h3>
+            {/* Facebook */}
+            <a
+              href="https://m.me/bariwu.hunnior"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebook
                 size={20}
-                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-              />
-            </h3>
-
-            <a href="https://ig.me/m/bariwujhunnior">
-              <FaInstagram
-                size={20}
-                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-170 cursor-pointer"
               />
             </a>
 
-            <h3>
-              <a href="https://twitter.com/messages/compose?recipient_id=801100598196260864">
-                <FaTwitter
-                  size={20}
-                  className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-                />
-              </a>
-            </h3>
-            <h3>
+            {/* Instagram */}
+            <a
+              href="https://ig.me/m/bariwujhunnior"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram
+                size={20}
+                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </a>
+
+            {/* Twitter */}
+            <a
+              href="https://twitter.com/messages/compose?recipient_id=801100598196260864"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter
+                size={20}
+                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:bariwunyankpani@gmail.com?subject=Library%20Contact."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaMailBulk
                 size={20}
-                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-170 cursor-pointer"
               />
-            </h3>
+            </a>
+
+            {/* whatsApp */}
+            <a
+              href="https://wa.me/233243940110?text=Hello%20BookWorm%20Buddy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp
+                size={20}
+                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+              />
+            </a>
           </div>
         </div>
       </footer>
