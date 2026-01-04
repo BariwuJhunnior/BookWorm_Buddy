@@ -152,10 +152,11 @@ const Layout = () => {
               href="https://m.me/bariwu.hunnior"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact us on Facebook"
             >
               <FaFacebook
                 size={20}
-                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-110"
               />
             </a>
 
@@ -164,10 +165,11 @@ const Layout = () => {
               href="https://ig.me/m/bariwujhunnior"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact us on Instagram"
             >
               <FaInstagram
                 size={20}
-                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-110"
               />
             </a>
 
@@ -176,34 +178,36 @@ const Layout = () => {
               href="https://twitter.com/messages/compose?recipient_id=801100598196260864"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact us on Twitter"
             >
               <FaTwitter
                 size={20}
-                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-110"
               />
             </a>
 
             {/* Email */}
             <a
               href="mailto:bariwunyankpani@gmail.com?subject=Library%20Contact."
-              target="_blank"
               rel="noopener noreferrer"
+              aria-label="Send us an email"
             >
               <FaMailBulk
                 size={20}
-                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-110"
               />
             </a>
 
-            {/* whatsApp */}
+            {/* WhatsApp */}
             <a
               href="https://wa.me/233243940110?text=Hello%20BookWorm%20Buddy"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact us on WhatsApp"
             >
               <FaWhatsapp
                 size={20}
-                className="transform transition duration-300 hover:scale-170 cursor-pointer"
+                className="transform transition duration-300 hover:scale-110"
               />
             </a>
           </div>
