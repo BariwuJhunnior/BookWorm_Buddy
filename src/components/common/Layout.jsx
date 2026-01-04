@@ -153,16 +153,20 @@ const Layout = () => {
               />
             </h3>
             <h3>
-              <FaInstagram
-                size={20}
-                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-              />
+              <a href="https://ig.me/m/bariwujhunnior">
+                <FaInstagram
+                  size={20}
+                  className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+                />
+              </a>
             </h3>
             <h3>
-              <FaTwitter
-                size={20}
-                className="tranform transition duration-300 hover:scale-170 cursor-pointer"
-              />
+              <a href="https://twitter.com/messages/compose?recipient_id=801100598196260864">
+                <FaTwitter
+                  size={20}
+                  className="tranform transition duration-300 hover:scale-170 cursor-pointer"
+                />
+              </a>
             </h3>
             <h3>
               <FaMailBulk
