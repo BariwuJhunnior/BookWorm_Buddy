@@ -123,7 +123,7 @@ const Layout = () => {
         <Outlet />
       </main>
 
-      <footer className="px-6 py-4 mt-auto bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg grid grid-cols-3 text-[12px] place-items-center">
+      <footer className="px-6 py-4 mt-auto bg-gray-800/20 backdrop-blur-md border-b border-white/10 text-white transition-all duration-150 w-full shadow-lg grid grid-cols-2 sm:grid-cols-3 text-[12px] place-items-center">
         {/* Logo */}
         <div className="flex items-center justify-center p-1 bg-transparent">
           <h1 className="text-1xl md:text-2xl font-extrabold tracking-tighter text-slate-400 flex items-center">
@@ -144,9 +144,9 @@ const Layout = () => {
         </div>
 
         {/* Contact Us */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center col-span-2 sm:col-span-1">
           <div className="mb-3 font-bold">Contact Us :</div>
-          <div className="flex gap-3">
+          <div className="flex gap-1">
             {/* Facebook */}
             <a
               href="https://m.me/bariwu.hunnior"
